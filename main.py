@@ -13,9 +13,9 @@ if __name__ == "__main__":
     sales_service = SalesService()
     data = csv_reader_obj.get_each_doc(JsonData.get_path())
 
-    print(sales_service.save_sales_data(data))
-    print(sales_service.get_num_of_docs())
+    sales_service.save_sales_data(data)
+    sales_service.get_num_of_docs()
 
-    # print(sales_service.sort_docs_descending(desc_field_name))# uncomment this to sort the records in descending order
-    # print(sales_service.sort_docs_ascending(asc_field_name))  # uncomment this to sort the records in descending order
-    # print(sales_service.delete_doc(field_name, field_value))  # uncomment this to delete a record from database
+    # sales_service.sort_docs_descending(desc_field_name) # uncomment this to sort the records in descending order
+    # sales_service.sort_docs_ascending(asc_field_name)  # uncomment this to sort the records in descending order
+    # sales_service.delete_doc(field_name, field_value)  # uncomment this to delete a record from database
