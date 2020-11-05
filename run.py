@@ -1,58 +1,37 @@
-"""
-run.py -- where you do all the main algorithms and operations implemented(main implementation)(proper class with
-instance methods)
-"""
-import utilities
+from utilities import SalesOperations
 
-import csv
-from pymongo import MongoClient
+import json
+
+from utilities import DbConnection
 
 
-class MongoDB(object):
+class SalesService:  # creating class for database operations
 
-    def __init__(self, db_name=None, collection_name=None):
+    """def __init__(self, host, port, db_name, coll_name, path, db_conn):
+        self.host = host
+        self.port = port
         self.db_name = db_name
-        self.collection_name = collection_name
+        self.coll_name = coll_name
+        self.path = path
+        self.db_conn = db_conn"""
 
-        self.client = MongoClient("localhost", 27017)
+    def __init__(self):
+        self.conn = DbConnection.db_connection()
 
-        self.db = self.client[self.db_name]
-        self.collection = self.db[self.collection_name]
+    def save_sales_data(self, data):
+        inserted_recs = []
 
-    def csv_reader(self):
-        with open(r"C:\Users\DELL\Desktop\100000 Sales Records.csv", 'r') as file:
-            reader = csv.DictReader(file)
+        for row in data:
+            if row not in SalesOperations.total_docs_in_db(self.conn):
+                recs = SalesOperations.insert_each_record(self.conn, row)
+                inserted_recs.append(recs)
+            else:
+                return "document already exists "
 
-            for row in reader:
-                yield row
+    def get_num_of_docs(self):
+        return SalesOperations.total_no_of_records(self.conn)
 
-    def read_each_doc(self):
-        read_obj = self.csv_reader()
-        ls = []
-        for each in read_obj:
-            ls.append(each)
-            return ls
 
-    def insert_each_record(self, path):
-        try:
-            with open(path, 'r') as sales_records:
-                read_sales_records = csv.DictReader(sales_records)
-                for each in read_sales_records:
-                    self.collection.insert_one(each)
-                print("successfully inserted each document")
-        except Exception as e:
-            print(e)
+    def sort_docs(self):
+        pass
 
-    def total_no_of_records(self):
-        doc_count = self.collection.count_documents({})
-        print("Total number of documents : ", doc_count)
-
-    def sorting_records_ascend(self, fieldname):
-        records_ascend = self.collection.find().sort(fieldname, 1)
-        # for each in records_ascend:
-        # print(each)
-
-    def sorting_records_descend(self, fieldname):
-        records_descend = self.collection.find().sort(fieldname, -1)
-        # for each in records_descend:
-        # print(each)

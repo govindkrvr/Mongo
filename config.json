@@ -1,0 +1,6 @@
+
+{"path" : "C:/Users/DELL/Desktop/Book1.csv",
+"host": "localhost",
+"port": 27017,
+"db_name":"Sales_DB",
+"collection_name": "Sales_records"}
