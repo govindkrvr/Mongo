@@ -1,6 +1,0 @@
-config.json to store all the config information, path and db details should be taken from the config.json only
-
-no hard coding
-don't mix utils code to main code
-path and db details should be taken from the config.json only
-follow proper documentation,method parameters, parameters explanation, module level class level documentation
