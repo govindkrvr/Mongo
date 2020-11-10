@@ -70,7 +70,7 @@ def dict_from_obj(employee):
 
 @application.route('/')
 def index():
-    return "Welcome"
+    return "Welcome to Employee Management System"
 
 
 @application.route('/login', methods=['GET', 'POST'])
@@ -90,9 +90,9 @@ def login():
     return make_response('could not verify', 401, {'WWW.Authentication': 'Basic realm: "login required"'})
 
 
-@application.route('/create_employee', methods=['POST'])
+@application.route('/add_employee', methods=['POST'])
 @token_required
-def create_employee():
+def add_employee():
     """
     method to create an employee
     :return: checks whether employee exists or not by using employee id which is unique if exists
