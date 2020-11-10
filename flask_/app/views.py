@@ -218,7 +218,7 @@ def add_employee():
             'Status': 'Created Successfully',
             'Result': emp_dict
         }
-        return make_response(jsonify(return_data), 200)
+        return make_response(jsonify(return_data), 201)
 
     except Exception as e:
         return_data = {
@@ -391,10 +391,10 @@ def update_employee(employee_id):
 
             return_data = {
                 'Success': True,
-                'Status': 'Created Successfully',
+                'Status': 'Updated Successfully',
                 'Result': emp_dict
             }
-            return make_response(jsonify(return_data), 200)
+            return make_response(jsonify(return_data), 201)
 
         else:
             return_data = {
@@ -472,7 +472,7 @@ def delete_employee(id):
                 'Status': 'Deleted Successfully',
                 'Result': emp_dict
             }
-            return make_response(jsonify(return_data), 200)
+            return make_response(jsonify(return_data), 201)
         else:
             return_data = {
                 'Success': False,
@@ -487,3 +487,4 @@ def delete_employee(id):
             'Result': 'Server Error'
         }
         return make_response(jsonify(return_data), 500)
+
